@@ -1,41 +1,37 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-export function RootHeader() {
-  const [isOpenNav, setIsOpenNav] = React.useState(false);
-  const [prevScrollPos, setPrevScrollPos] = React.useState(0);
-  const [visible, setVisible] = React.useState(true);
+// export interface IRootheaderProps {
+// }
 
-  const handleScroll = () => {
-    const currentScrollPos = window.pageYOffset;
-    if (prevScrollPos > currentScrollPos) {
-      setVisible(true);
+export function RootHeader() {
+  const [isScrolled, setIsScrolled] = React.useState<boolean>(false);
+  const [isOpenNav, setIsOpenNav] = React.useState(false);
+
+  const checkScrollPoition = () => {
+    if (window.scrollY > 20) {
+      setIsScrolled(true);
     } else {
-      setVisible(false);
+      setIsScrolled(false);
     }
-    setPrevScrollPos(currentScrollPos);
   };
 
   React.useEffect(() => {
-    setPrevScrollPos(window.pageYOffset);
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [prevScrollPos, handleScroll]);
-
+    window.addEventListener("scroll", checkScrollPoition);
+  }, []);
   return (
     <nav
-      className={`${
-        visible ? "top-0" : "-top-20"
-      } transition-all duration-300 ease-in-out bg-white dark:bg-gray-900 fixed w-full z-20 start-0 border-b border-gray-200 dark:border-gray-600`}
+      className={`
+        bg-white dark:bg-gray-900 fixed w-full z-20 start-0 border-b border-gray-200 dark:border-gray-600`}
     >
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div
+        className={`${
+          isScrolled ? "mt-0" : "mt-10"
+        } max-w-screen-xl flex flex-wrap items-center justify-between mx-auto transition-all duration-300 ease-in-out p-4`}
+      >
         <Link
           href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
