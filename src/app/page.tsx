@@ -1,10 +1,14 @@
-import { AdminLayout } from "@/components/layout/main/admin_layout";
-// import Image from "next/image";
+"use client";
+
+import { RootHeader } from "@/components/layout/header";
 
 export default function Home() {
   return (
     <>
-      <AdminLayout />
+      <div>
+        <RootHeader />
+        <div></div>
+      </div>
     </>
   );
 }

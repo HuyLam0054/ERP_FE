@@ -1,8 +1,7 @@
-import type { Metadata } from "next";
+// src/app/layout.tsx
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "../styles/globals.css";
-import { RootHeader } from "@/components/layout/header";
-import { RootSidebar } from "@/components/layout/sidebar/main_sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,23 +13,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Brian ERP",
   description: "Create by Huy Lam",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <RootHeader />
-        <RootSidebar />
         {children}
       </body>
     </html>
