@@ -3,11 +3,12 @@ import Link from "next/link";
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { MdOutlineMenuOpen } from "react-icons/md";
+import { AuthButton } from "@/components/common/buttons/auth.button";
 
 export function RootHeader() {
   const router = useRouter();
   return (
-    <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+    <nav className="bg-white dark:bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
           href="/"
@@ -30,6 +31,7 @@ export function RootHeader() {
           >
             Get started
           </button>
+          <AuthButton />
           <button
             data-collapse-toggle="navbar-sticky"
             type="button"

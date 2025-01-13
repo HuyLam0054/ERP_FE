@@ -1,7 +1,7 @@
-// src/app/layout.tsx
-
 import { Geist, Geist_Mono } from "next/font/google";
 import "../styles/globals.css";
+import { getServerSession } from "next-auth";
+import SessionProvider from "@/components/layout/session_provider/session.provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,17 +18,20 @@ export const metadata = {
   description: "Create by Huy Lam",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession();
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <SessionProvider session={session}>
+          <main>{children}</main>
+        </SessionProvider>
       </body>
     </html>
   );
